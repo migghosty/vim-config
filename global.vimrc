@@ -18,6 +18,11 @@ set nocompatible
 " syntax
 syntax on
 
+" Set color
+set t_Co=256
+set background=dark
+colorscheme desert
+
 " Numbering
 set number relativenumber
 
@@ -50,9 +55,6 @@ set scrolloff=10
 set colorcolumn=140
 set nowrap
 set splitright
-
-" Set color
-colorscheme desert
 
 " Searching
 set incsearch
@@ -111,8 +113,8 @@ augroup END
 " Make it easier to grow/shrink window size
 nnoremap <c-up> <c-w>+
 nnoremap <c-down> <c-w>-
-nnoremap <c-left> <c-w>>
-nnoremap <c-right> <c-w><
+nnoremap <c-left> <c-w><
+nnoremap <c-right> <c-w>>
 
 " Center cursor when jumping to next word in search
 nnoremap n nzz
@@ -221,6 +223,18 @@ nnoremap <silent> <Leader>e :call ToggleNetrwSidebar()<CR>
 
 """""""""""""""""""""""""""
 " END - PLUGINS
+"""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""
+" START - NEOVIM
+"""""""""""""""""""""""""""
+if has("nvim")
+   set termguicolors    " enable 24-bit color support
+   set mouse=           " disable mouse
+endif
+
+"""""""""""""""""""""""""""
+" END - NEOVIM
 """""""""""""""""""""""""""
 
 """""""""""""""""""""""""""
