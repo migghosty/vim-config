@@ -52,7 +52,7 @@ set nowrap
 set splitright
 
 " Set color
-colorscheme dessert
+colorscheme desert
 
 " Searching
 set incsearch
