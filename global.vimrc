@@ -6,6 +6,12 @@
 "                                  
 " Author: Miguel Meza-Ponce
 
+
+
+"""""""""""""""""""""""""""
+" START - GENERAL
+"""""""""""""""""""""""""""
+
 " Vim not compatible with Vi
 set nocompatible
 
@@ -43,6 +49,7 @@ set formatoptions+=crolq
 set scrolloff=10
 set colorcolumn=140
 set nowrap
+set splitright
 
 " Set color
 colorscheme peachpuff
@@ -53,13 +60,23 @@ set ignorecase
 set smartcase
 set hlsearch
 
+" Return to last edit position when opening files (You want this!)
+autocmd BufReadPost *
+   \ if line("'\"") > 0 && line("'\"") <= line("$") |
+   \   exe "normal! g`\"" |
+   \ endif
+
+"""""""""""""""""""""""""""
+" END - GENERAL
+"""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""
+" START - SHORTCUTS
+"""""""""""""""""""""""""""
+
 " Change mapleader
 nnoremap <SPACE> <Nop>
 let mapleader=" "
-
-"
-" START - Custom Shortcuts
-"
 
 " Remove Highlight
 nnoremap <leader>h :noh<CR>
@@ -107,13 +124,13 @@ inoremap jj <esc>
 " Jump to previous file - not working :(
 " nnoremap <leader>p <c-6>
 
-"
-" END - Custom Shortcuts
-"
+"""""""""""""""""""""""""""
+" END - SHORTCUTS
+"""""""""""""""""""""""""""
 
-"
-" START - Status Line
-"
+"""""""""""""""""""""""""""
+" START - STATUS LINE
+"""""""""""""""""""""""""""
 
 " Always enable
 set laststatus=2
@@ -130,20 +147,16 @@ set statusline+=%=
 " Status line right side.
 set statusline+=\ ascii:\ %b\ row:\ %l/%L\ col:\ %c\ percent:\ %p%%
 
-"
-" END - Status Line
-"
+"""""""""""""""""""""""""""
+" END - STATUS LINE
+"""""""""""""""""""""""""""
 
-"
-" START - TAGS
-"
+"""""""""""""""""""""""""""
+" START - PROGRAMMING
+"""""""""""""""""""""""""""
 
 " Look for tags upwards
 set tags=tags;
-
-"
-" END - TAGS
-"
 
 " Need those man pages
 " Usage:
@@ -154,16 +167,22 @@ set tags=tags;
 "     <leader>K --> Horizontal split
 runtime! ftplugin/man.vim
 
-" Change working directory to current file
-"set autochdir
+" Makefile tabs should be tabs not spaces
+autocmd FileType make setlocal noexpandtab
 
-" Netrw (file search)
+"""""""""""""""""""""""""""
+" END - PROGRAMMING
+"""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""
+" START - NETRW (file search)
+"""""""""""""""""""""""""""
+
 let g:netrw_keepdir=1         " stay in root directory
 let g:netrw_browse_split=4    " open file in previous window
 let g:netrw_liststyle=3       " tree view
 let g:netrw_banner=0          " hide banner
 let g:netrw_winsize=15        " set the netrw window size
-"set splitright
 
 " track netrw state
 let g:NetrwIsOpen = 0
@@ -175,7 +194,7 @@ function! ToggleNetrwSidebar()
     let i = bufnr('$')
     while i >= 1
       if getbufvar(i, '&filetype') ==# 'netrw'
-        silent exe 'bwipeout ' . i
+        silent exe 'bwipeout! ' . i
       endif
       let i -= 1
     endwhile
@@ -190,22 +209,25 @@ endfunction
 " map <Leader>e to toggle sidebar
 nnoremap <silent> <Leader>e :call ToggleNetrwSidebar()<CR>
 
-" Makefile tabs should be tabs not spaces
-autocmd FileType make setlocal noexpandtab
+"""""""""""""""""""""""""""
+" END - NETRW (file search)
+"""""""""""""""""""""""""""
 
-" Return to last edit position when opening files (You want this!)
-autocmd BufReadPost *
-   \ if line("'\"") > 0 && line("'\"") <= line("$") |
-   \   exe "normal! g`\"" |
-   \ endif
-
-"
-" Plugins
-"
+"""""""""""""""""""""""""""
+" START - PLUGINS
+"""""""""""""""""""""""""""
 
 " execute pathogen#infect()
 
-" gather local vim settings
+"""""""""""""""""""""""""""
+" END - PLUGINS
+"""""""""""""""""""""""""""
+
+"""""""""""""""""""""""""""
+" START - THE END
+"""""""""""""""""""""""""""
+
+" source local vimrc
 set exrc    " vim checks for current working directory .vimrc
 set secure  " prevent risky commands (like shell exec) unless file is owned by ME
 
@@ -230,4 +252,8 @@ set secure  " prevent risky commands (like shell exec) unless file is owned by M
 "   \  let tags_path = source_path . "tags" |
 "   \  silent! exe "!ctags -R -f" tags_path source_path "&" |
 "   \ endif
+
+"""""""""""""""""""""""""""
+" END - THE END
+"""""""""""""""""""""""""""
 
