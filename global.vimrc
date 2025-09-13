@@ -32,7 +32,7 @@ set autoindent
 set cindent
 
 " autocomplete comments
-set formatoptions+=cro
+set formatoptions+=crolq
 
 " Show tabs and spaces
 " set list
@@ -157,16 +157,16 @@ runtime! ftplugin/man.vim
 " Change working directory to current file
 "set autochdir
 
-" track netrw state
-let g:NetrwIsOpen = 0
-
 " Netrw (file search)
 let g:netrw_keepdir=1         " stay in root directory
-let g:netrw_browse_split=4    " open file in same window
+let g:netrw_browse_split=4    " open file in previous window
 let g:netrw_liststyle=3       " tree view
 let g:netrw_banner=0          " hide banner
 let g:netrw_winsize=15        " set the netrw window size
 "set splitright
+
+" track netrw state
+let g:NetrwIsOpen = 0
 
 " fancy sidebar toggle
 function! ToggleNetrwSidebar()
@@ -190,7 +190,6 @@ endfunction
 " map <Leader>e to toggle sidebar
 nnoremap <silent> <Leader>e :call ToggleNetrwSidebar()<CR>
 
-
 " Makefile tabs should be tabs not spaces
 autocmd FileType make setlocal noexpandtab
 
@@ -211,7 +210,6 @@ set exrc    " vim checks for current working directory .vimrc
 set secure  " prevent risky commands (like shell exec) unless file is owned by ME
 
 " Ideally we want the following in the project root directory
-"nnoremap <leader>e :Explore <root_path><CR>
 
 " When in snapshot, run buildit
 " TODO improve it instead of just hardcoding this stuff
