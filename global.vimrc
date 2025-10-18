@@ -3,7 +3,7 @@
 "   \ \ / / | || |\/| | |_) | |
 "    \ V /  | || |  | |  _ <| |___
 "     \_/  |___|_|  |_|_| \_\\____|
-"                                  
+"
 " Author: Miguel Meza-Ponce
 
 
@@ -46,15 +46,14 @@ set cindent
 set formatoptions+=crolq
 
 " Show tabs and spaces
-" set list
-" set listchars=tab:→+,trail:-
-" set listchars=space:· " Does not work :( sadd
+set list
+set listchars=tab:→\ ,trail:·
 
 " Screen
 set scrolloff=10
 set colorcolumn=140
 set nowrap
-set splitright
+"set splitright
 
 " Searching
 set incsearch
@@ -177,49 +176,34 @@ autocmd FileType make setlocal noexpandtab
 """""""""""""""""""""""""""
 
 """""""""""""""""""""""""""
-" START - NETRW (file search)
-"""""""""""""""""""""""""""
-
-let g:netrw_keepdir=1         " stay in root directory
-let g:netrw_browse_split=4    " open file in previous window
-let g:netrw_liststyle=3       " tree view
-let g:netrw_banner=0          " hide banner
-let g:netrw_winsize=15        " set the netrw window size
-
-" track netrw state
-let g:NetrwIsOpen = 0
-
-" fancy sidebar toggle
-function! ToggleNetrwSidebar()
-  if g:NetrwIsOpen
-    " Close all netrw buffers
-    let i = bufnr('$')
-    while i >= 1
-      if getbufvar(i, '&filetype') ==# 'netrw'
-        silent exe 'bwipeout! ' . i
-      endif
-      let i -= 1
-    endwhile
-    let g:NetrwIsOpen = 0
-  else
-    " Open netrw in vertical split, resize to 15% of screen
-    let g:NetrwIsOpen = 1
-    silent execute 'Vexplore .'
-  endif
-endfunction
-
-" map <Leader>e to toggle sidebar
-nnoremap <silent> <Leader>e :call ToggleNetrwSidebar()<CR>
-
-"""""""""""""""""""""""""""
-" END - NETRW (file search)
-"""""""""""""""""""""""""""
-
-"""""""""""""""""""""""""""
 " START - PLUGINS
 """""""""""""""""""""""""""
+call plug#begin()
 
-" execute pathogen#infect()
+Plug 'ap/vim-buftabline'
+Plug 'preservim/nerdtree'
+Plug 'ludovicchabant/vim-gutentags'
+Plug 'skywind3000/gutentags_plus'
+Plug 'preservim/tagbar'
+
+call plug#end()
+
+" NERDTREE
+nnoremap <Leader>e :NERDTreeToggle<CR>
+
+" GUTENTAGS
+" enable gtags module
+let g:gutentags_modules = ['ctags', 'gtags_cscope']
+" config project root markers.
+let g:gutentags_project_root = ['.root']
+" generate datebases in my cache directory, prevent gtags files polluting my project
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+" forbid gutentags adding gtags databases
+let g:gutentags_auto_add_gtags_cscope = 0
+
+" TAGBAR
+let g:tagbar_use_cache = 0
+nnoremap <Leader>o :TagbarOpenAutoClose<CR>
 
 """""""""""""""""""""""""""
 " END - PLUGINS
@@ -253,7 +237,7 @@ set secure  " prevent risky commands (like shell exec) unless file is owned by M
 "nnoremap <F6> :!$SNAPSHOT/htr/target/litespeed/buildit apps.bin<CR>
 " Auto create tags file (GIT)
 "autocmd BufWritePost *.c,*.h
-"   \ if !empty($SNAPSHOT) | 
+"   \ if !empty($SNAPSHOT) |
 "   \  let source_path = $SNAPSHOT . "/htr/source/" |
 "   \  let tags_path = source_path . "tags" |
 "   \  silent! exe "!ctags -R -f" tags_path source_path "&" |
