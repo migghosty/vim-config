@@ -193,7 +193,7 @@ nnoremap <Leader>e :NERDTreeToggle<CR>
 
 " GUTENTAGS
 " enable gtags module
-let g:gutentags_modules = ['ctags', 'gtags_cscope']
+let g:gutentags_modules = ['ctags']
 " config project root markers.
 let g:gutentags_project_root = ['.root']
 " generate datebases in my cache directory, prevent gtags files polluting my project
