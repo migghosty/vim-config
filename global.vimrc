@@ -182,24 +182,29 @@ call plug#begin()
 
 Plug 'ap/vim-buftabline'
 Plug 'preservim/nerdtree'
-Plug 'ludovicchabant/vim-gutentags'
-Plug 'skywind3000/gutentags_plus'
+"Plug 'ludovicchabant/vim-gutentags'
+"Plug 'skywind3000/gutentags_plus'
 Plug 'preservim/tagbar'
 
 call plug#end()
+
+" BUFTABLINE
+let g:buftabline_numbers = 1
+let g:buftabline_indicators = 1
+let g:buftabline_separators = 1
 
 " NERDTREE
 nnoremap <Leader>e :NERDTreeToggle<CR>
 
 " GUTENTAGS
 " enable gtags module
-let g:gutentags_modules = ['ctags']
+"let g:gutentags_modules = ['ctags']
 " config project root markers.
-let g:gutentags_project_root = ['.root']
+"let g:gutentags_project_root = ['.root']
 " generate datebases in my cache directory, prevent gtags files polluting my project
-let g:gutentags_cache_dir = expand('~/.cache/tags')
+"let g:gutentags_cache_dir = expand('~/.cache/tags')
 " forbid gutentags adding gtags databases
-let g:gutentags_auto_add_gtags_cscope = 0
+"let g:gutentags_auto_add_gtags_cscope = 0
 
 " TAGBAR
 let g:tagbar_use_cache = 0
