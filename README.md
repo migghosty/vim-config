@@ -1,8 +1,7 @@
 # Install Vim-Plug
 
 ## Dependencies
-sudo apt upgrade
-sudo apt install curl git
+sudo apt upgrade && sudo apt install curl git
 
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
     https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
